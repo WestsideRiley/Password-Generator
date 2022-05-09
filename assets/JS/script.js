@@ -28,7 +28,7 @@ function generatePassword(passwordLength) {
 
     while (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength) ) {
 
-      var passwordLength= parseInt(prompt("How long is the password?"));
+      var passwordLength= parseInt(prompt("How many characters is the password?"));
 
         if (isNaN(passwordLength)){
           alert("Please insert a number!");
