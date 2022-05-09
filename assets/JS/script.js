@@ -44,6 +44,15 @@ function generatePassword(passwordLength) {
 
 //Prompting System for obtaining the specifications of the password from the user 
 
+var containsLowers= prompt("Should this password contain lowercase letters?");
+    
+    while (containsLowers !== "yes" && containsLowers !== "no" ) {
+
+        if (true) {
+
+          containsLowers=prompt("Please respond with yes or no")     
+        }
+      }
   var containsNumbers= prompt("Should this password contain numbers?");
     
     while (containsNumbers !== "yes" && containsNumbers !== "no" ) {
@@ -82,12 +91,21 @@ function generatePassword(passwordLength) {
   var Special="!#$%&*+=-<>?@^"
   const allChars = lowerCase + numbers + upperCase + Special;
   const LowerOnly=lowerCase;
-  const NumberOnly= lowerCase + numbers;
-  const UpperOnly= lowerCase + upperCase;
-  const SpecialOnly= lowerCase + Special;
-  const NumUpper = lowerCase + numbers + upperCase;
-  const NumSpec = lowerCase + numbers + Special;
-  const UpperSpec= lowerCase + upperCase + Special;
+  const NumberOnly= numbers;
+  const UpperOnly= upperCase;
+  const SpecialOnly= Special;
+  const NumberLower = lowerCase + numbers;
+  const UpperLower = lowerCase + upperCase;
+  const SpecialLower = lowerCase + Special;
+  const NumUpper = numbers + upperCase;
+  const NumSpec =  numbers + Special;
+  const UpperSpec= upperCase + Special;
+  const LowerUpperNum= lowerCase + upperCase + numbers;
+  const UpperNumSpec = upperCase + numbers + Special;
+  const LowerUpperSpec =lowerCase + upperCase + Special;
+  const LowerNumSpec =lowerCase + numbers + Special;
+
+
  
 //  Parameters used for defining the arrays to use 
   var randPasswordArray = Array(passwordLength);
@@ -100,39 +118,71 @@ function generatePassword(passwordLength) {
   //Function for sorting the proper response based on the 
   function PasswordCriteria(){
          
-        if(containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="yes"){
+        if(containsLowers==="yes" && containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="yes"){
            return allChars;    
         }
 
-        if(containsUpper==="no" && containsNumbers==="no" && containsSpecial==="no"){
+        if(containsLowers==="yes" && containsUpper==="no" && containsNumbers==="no" && containsSpecial==="no"){
            return LowerOnly;
         }
 
-        if(containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="no"){
+        if(containsLowers==="no" && containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="no"){
            return NumberOnly;
         }
 
-        if(containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="no"){
+        if(containsLowers==="no" && containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="no"){
            return UpperOnly;
         }
 
-        if(containsUpper==="no" && containsNumbers==="no" && containsSpecial==="yes"){
+        if(containsLowers==="no" && containsUpper==="no" && containsNumbers==="no" && containsSpecial==="yes"){
            return SpecialOnly;  
         }
 
-        if(containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="no"){
+        if(containsLowers==="no" && containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="no"){
           return NumUpper;   
         }
 
-        if(containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="yes"){
+        if(containsLowers==="no" && containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="yes"){
           return NumSpec;
         }
 
-        if(containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="yes"){
+        if(containsLowers==="no" && containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="yes"){
           return UpperSpec;    
         }
 
+        if(containsLowers==="yes" && containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="no"){
+          return NumberLower;   
+        }
+
+        if(containsLowers==="yes" && containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="no"){
+          return UpperLower;
+        }
+
+        if(containsLowers==="yes" && containsUpper==="no" && containsNumbers==="no" && containsSpecial==="yes"){
+          return SpecialLower;   
+        }
+
+        if(containsLowers==="yes" && containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="no"){
+          return LowerUpperNum;
+        }
+
+        if(containsLowers==="no" && containsUpper==="yes" && containsNumbers==="yes" && containsSpecial==="yes"){
+          return UpperNumSpec;    
+        }
+
+        if(containsLowers==="yes" && containsUpper==="no" && containsNumbers==="yes" && containsSpecial==="yes"){
+          return LowerNumSpec;   
+        }
+
+        if(containsLowers==="yes" && containsUpper==="yes" && containsNumbers==="no" && containsSpecial==="yes"){
+          return LowerUpperSpec;
+        }
+
+        if(containsLowers==="no" && containsUpper==="no" && containsNumbers==="no" && containsSpecial==="no"){
+          alert("No criteria, No password amigo");   
+        }
   }
+
 //Code for shuffling the arrays 
   return shuffleArray(randPasswordArray.map(function(x) { return x[Math.floor(Math.random() * x.length)] })).join('');
 
